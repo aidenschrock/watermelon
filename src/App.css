@@ -14,6 +14,9 @@
   text-align: center;
   width: 100%;
   font-family: 'Righteous', sans-serif;
+  -webkit-text-stroke-width: 5px;
+  -webkit-text-stroke-color: #fa426b;
+  -webkit-text-fill-color: black; 
 }
 
 

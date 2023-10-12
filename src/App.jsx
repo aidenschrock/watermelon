@@ -1,7 +1,7 @@
 import { useState, useRef, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useGLTF, Environment, OrbitControls } from '@react-three/drei'
+import { useGLTF, Environment, OrbitControls, PresentationControls } from '@react-three/drei'
 import { EffectComposer, DepthOfField, ChromaticAberration } from '@react-three/postprocessing'
 import { BlendFunction } from 'postprocessing'
 import { useControls } from 'leva'
@@ -51,19 +51,16 @@ export default function App({ count = 70, depth = 80 }) {
     <>
       <Canvas gl={{ alpha: false }} camera={{ near: 0.01, far: 180, fov: 10 }}>
         <color attach="background" args={['#fa426b']} />
-        <OrbitControls />
-        {/* <spotLight position={[10, 10, 10]} intensity={2} /> */}
+
         <Suspense>
-          {Array.from({ length: count }, (_, i) => (
-            <Watermelon key={i} z={-(i / count) * depth - 20} />
-          ))}
-          {/* <Environment preset='sunset' /> */}
+          <PresentationControls global={true} snap={true} azimuth={[-0.02, 0.02]} polar={[-.05, -0.03]}>
+            {Array.from({ length: count }, (_, i) => (
+              <Watermelon key={i} z={-(i / count) * depth - 20} />
+            ))}
+          </PresentationControls>
           <EffectComposer>
             <DepthOfField target={[0, 0, depth / 2]} focalLength={0.5} bokehScale={8} />
-            {/* <ChromaticAberration
-              blendFunction={BlendFunction.NORMAL} // blend mode
-              offset={[0.02, 0.002]} // color offset
-            /> */}
+
           </EffectComposer>
         </Suspense>
       </Canvas>
