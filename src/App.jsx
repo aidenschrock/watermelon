@@ -59,8 +59,10 @@ export default function App({ count = 30, depth = 80 }) {
             ))}
           </PresentationControls>
           <EffectComposer>
-            <DepthOfField target={[0, 0, depth / 2]} focalLength={0.5} bokehScale={8} />
-
+            <ChromaticAberration
+              blendFunction={BlendFunction.HUE}
+              offset={[0.02, 0.002]} // color offset
+            />
           </EffectComposer>
         </Suspense>
       </Canvas>
