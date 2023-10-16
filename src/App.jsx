@@ -44,7 +44,7 @@ function Watermelon({ z }) {
 }
 
 
-export default function App({ count = 70, depth = 80 }) {
+export default function App({ count = 30, depth = 80 }) {
   // const color = useControls({ value: '#fa426b' })
 
   return (
